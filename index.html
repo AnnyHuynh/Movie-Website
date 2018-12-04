@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movies of all times...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Pagination -->
+    <!-- <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/pagination.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar navbar-dark" id="main-nav">
+            <a class="navbar-brand" href="index.html">
+                <img src="./assets/images/film-logo.png" id="logo-img" alt="Logo">
+            </a>
+
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Genres
+                </a>
+                <div class="dropdown-menu scrollable-menu" id="genre" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" id="28" href="#">Action</a>
+                    <a class="dropdown-item" id="12" href="#">Adventure</a>
+                    <a class="dropdown-item" id="16" href="#">Animation</a>
+                    <a class="dropdown-item" id="35" href="#">Comedy</a>
+                    <a class="dropdown-item" id="80" href="#">Crime</a>
+                    <a class="dropdown-item" id="99" href="#">Documentary</a>
+                    <a class="dropdown-item" id="18" href="#">Drama</a>
+                    <a class="dropdown-item" id="10751" href="#">Family</a>
+                    <a class="dropdown-item" id="14" href="#">Fantasy</a>
+                    <a class="dropdown-item" id="36" href="#">History</a>
+                    <a class="dropdown-item" id="27" href="#">Horror</a>
+                    <a class="dropdown-item" id="10402" href="#">Music</a>
+                    <a class="dropdown-item" id="9648" href="#">Mystery</a>
+                    <a class="dropdown-item" id="10749" href="#">Romance</a>
+                    <a class="dropdown-item" id="878" href="#">Science Fiction</a>
+                    <a class="dropdown-item" id="10770" href="#">TV Movie</a>
+                    <a class="dropdown-item" id="53" href="#">Thriller</a>
+                    <a class="dropdown-item" id="10752" href="#">War</a>
+                    <a class="dropdown-item" id="37" href="#">Western</a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Decade
+                </a>
+                <div class="dropdown-menu scrollable-menu" id="decade" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" id="20's" href="#">1920's</a>
+                    <a class="dropdown-item" id="30's" href="#">1930's</a>
+                    <a class="dropdown-item" id="40's" href="#">1940's</a>
+                    <a class="dropdown-item" id="50's" href="#">1950's</a>
+                    <a class="dropdown-item" id="60's" href="#">1960's</a>
+                    <a class="dropdown-item" id="70's" href="#">1970's</a>
+                    <a class="dropdown-item" id="80's" href="#">1980's</a>
+                    <a class="dropdown-item" id="90's" href="#">1990's</a>
+                    <a class="dropdown-item" id="00's" href="#">2000's</a>
+                    <a class="dropdown-item" id="10's" href="#">2010's</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" onClick="showTimes()">Now Playing near me...</a>
+            </div>
+
+            <form class="form-inline my-2 my-lg-0" id='my-form'>
+                <input id='movie-input' class="form-control mr-sm-2" type="search" placeholder="Search By Title"
+                    aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+            <div class="tooltip"><button id="notification" style="padding: 0; border: none"><svg class="octicon octicon-bell" viewBox="0 0 14 16" version="1.1" width="28" height="28" aria-hidden="false" style="background-color:rgb(58, 54, 54); fill: rgb(255, 136, 0)"><path fill-rule="evenodd" d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"></path></svg></button> 
+                <span class="tooltiptext hide">
+                        <h3 class="h3 Movie__header">To receive a list of our upcoming movies:</h3><br>
+                        <div id="movie-subscribe" class="movie__form">
+                        <input type="email" name="email-subscribe" class="input" id="email-input" placeholder="Enter your email address" style="width: 300px">
+                        <br><br>
+                        <button class="submit-email" id="email-submit">Submit</button>
+                        </div> <br>
+                        <div class="movies__thankyou">
+                        <p><b>Thank you! Please confirm your email address by responding to the email we just sent you.</b></p>
+                </span>
+            </div>
+
+            
+
+        </nav>
+
+        <!-- Background Images -->
+        <div class="row now-playing-container pic-hidden">
+
+            <div class="col-md-4">
+                <div class="pic-container" id="container-cl-1">
+                    <div class="outer-div">
+                        <div class="inner-div-in"></div>
+                        <div class='inner-div-out'></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pic-container" id="container-cl-2">
+                    <div class="outer-div">
+                        <div class="inner-div-in"></div>
+                        <div class='inner-div-out'></div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pic-container" id="container-cl-3">
+                    <div class="outer-div">
+                        <div class="inner-div-in"></div>
+                        <div class='inner-div-out'></div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class='container-fluid'>
+            <div id='loading'>
+                <h1 class='loadingH1'>loading...</h1>
+                <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="row" id="contentPanel"></div>
+        </div>
+
+        <!-- Playing Near me -->
+        <div class="row  playing-near-me">
+            <!-- <div id="map"></div> -->
+        </div>
+
+
+        <!-- About-us-Page -->
+
+        <div id="about-container" class="about-hidden">
+
+                <div id="content-about">
+                    <h1 id="about-us" class="text-left">About us</h1>
+                
+                    <hr style="border: solid 2px gray; width: 100%">
+                
+                    <br>
+        
+                    <img src="assets/images/image_1.png" id="looking-pic" alt="looking-pic">
+                
+                    <b><h2>Why?</h2>
+                    
+                    <p>Movie-of-All-Time gathers all the hottest and most popular movies of all time. Weither you are searching for new movies that just came out or old movies since 1920's, you will find them all on Movie-of-All-Time. You don't have to dig through google or multiple movie websites to look for you favorite movie anymore! Movie-of-All-Time is here to help you reduce your headache, save time on your searching process, and enjoying your time on your favorite movies.</p>
+                    
+                    <p>As film lovers ourselves, we became frustrated by how difficult it was to do a simple search, so we decided to gather together, puting out our best work and shot out the best movie website of all time!</p>
+                
+                    <h2>What is Movie-of-All-Time?</h2>
+                
+                    <p><strong>It's all about making  your search easier on all time movies, by movie genres or movie names, and where the movies are showing.</strong></p>
+                    <p>Movie-of-All-Time is a new and innovative type of search engine for movie listings, you can find all information about the movie, see movie trailers, posters, synopses, reviews, cast members and loads more..You can also find the location where the movies are showing or where you can watch your movies if the movies are no longer available in theathers. </p>
+                    <p>On Movie-of-All-Time, we use a cool movie database which helps you find information about a movie quickly.</p>       
+                    <p>Movie-of-All-Time is currently available in the United States and with more countries coming soon. The Movie-of-All-Time team is located in Seattle WA, US.</p>
+                
+                    <h2>What's next?</h2>
+                
+                    <p>It’s still in early stage for us at Movie-of-All-Time, but we plan to add more new and cool features which help on simplifying the user experience in the coming months.</p></b>
+                        <br><br>
+                </div>
+        </div>
+    </div>
+
+    </div>
+
+    <footer class="footer">
+        <h6> Copyright © <b>MAT</b> Movie-of-All-Time Ltd 2018
+            <a href="#" id="about">About Us</a>
+        </h6>
+    </footer>
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script> -->
+    <script src='assets/javascript/script.js'></script>
+</body>
+
+</html>
