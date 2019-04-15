@@ -53,7 +53,7 @@ API | Description | Auth | HTTPS | CORS
 https://api.themoviedb.org| Search movies | apiKey | Yes | Yes
 https://api.internationalshowtimes.com| Search movies playing nearby | apiKey | Yes | Yes
 
-###Technologies Used: 
+## Technologies Used: 
 
 HTML, CSS3, JavaScript, jQuery, Bootstrap, AJAX, API, Git. 
 
