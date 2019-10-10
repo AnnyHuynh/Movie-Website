@@ -70,7 +70,7 @@ NowPlaying = function () {
         method: "GET"
     })
         .then(function (response) { /* promise */
-            //console.log(response);
+            console.log(response);
 
             var top20 = response.results.length;
             for (i = 0; i < top20; i++) {
